@@ -1,0 +1,21 @@
+---
+# bootstrap_freebsd
+#
+
+- name: bootstrap freebsd
+  hosts: all # use: ansible-playbook -i <inventory-hosts> bootstrap_freebsd.yml -l <hostname>
+  gather_facts: no
+  tasks:
+
+  - name: pkg bootstrap
+    raw: 'env ASSUME_ALWAYS_YES=YES pkg bootstrap'
+    register: pkg_bootstrap
+    changed_when: "'pkg already bootstrapped' not in pkg_bootstrap.stdout"
+
+  - name: pkg install lang/python sysutils/dmidecode security/ca_root_nss
+    raw: 'env ASSUME_ALWAYS_YES=YES pkg install lang/python sysutils/dmidecode security/ca_root_nss'
+    register: pkg_install
+    changed_when: "'The most recent version of packages are already installed' not in pkg_install.stdout"
+
+# vim: set syn=yaml sw=2 ts=2 et :
+# eof
