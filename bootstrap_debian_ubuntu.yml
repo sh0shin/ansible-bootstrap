@@ -12,8 +12,8 @@
     register: apt_update
     changed_when: "'Get:' in apt_update.stdout"
 
-  - name: apt install dbus/python++
-    raw: 'apt-get install -qy --no-install-recommends python python-apt dbus'
+  - name: apt install dbus python++ ca-certificates
+    raw: 'apt-get install -qy --no-install-recommends dbus python2 python-apt ca-certificates'
     register: apt_install
     changed_when: "'0 upgraded, 0 newly installed' not in apt_install.stdout"
 
