@@ -1,0 +1,21 @@
+---
+# bootstrap_debian
+#
+
+- name: bootstrap debian
+  hosts: all # use: ansible-playbook -i <inventory-hosts> bootstrap_debian.yml -l <hostname>
+  gather_facts: no
+  tasks:
+
+  - name: apt update
+    raw: 'apt-get update -q'
+    register: apt_update
+    changed_when: "'Get:' in apt_update.stdout"
+
+  - name: apt install dbus python++ ca-certificates
+    raw: 'apt-get install -qy --no-install-recommends dbus python2 python-apt ca-certificates'
+    register: apt_install
+    changed_when: "'0 upgraded, 0 newly installed' not in apt_install.stdout"
+
+# vim: set syn=yaml sw=2 ts=2 et :
+# eof
