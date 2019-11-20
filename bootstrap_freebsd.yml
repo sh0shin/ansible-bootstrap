@@ -5,6 +5,7 @@
 - name: bootstrap freebsd
   hosts: all # use: ansible-playbook -i <inventory-hosts> bootstrap_freebsd.yml -l <hostname>
   gather_facts: no
+  strategy: linear
   tasks:
 
   - name: utc timezone
@@ -17,8 +18,8 @@
     register: pkg_bootstrap
     changed_when: "'pkg already bootstrapped' not in pkg_bootstrap.stdout"
 
-  - name: pkg install lang/python2 sysutils/dmidecode security/ca_root_nss
-    raw: 'env ASSUME_ALWAYS_YES=YES pkg install lang/python2 sysutils/dmidecode security/ca_root_nss'
+  - name: pkg install lang/python sysutils/dmidecode security/ca_root_nss
+    raw: 'env ASSUME_ALWAYS_YES=YES pkg install lang/python sysutils/dmidecode security/ca_root_nss'
     register: pkg_install
     changed_when: "'The most recent version of packages are already installed' not in pkg_install.stdout"
 
