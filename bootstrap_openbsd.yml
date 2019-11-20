@@ -5,10 +5,11 @@
 - name: bootstrap openbsd
   hosts: all # use: ansible-playbook -i <inventory-hosts> bootstrap_openbsd.yml -l <hostname>
   gather_facts: no
+  strategy: linear
   tasks:
 
   - name: pkg_add python dmidecode
-    raw: 'pkg_add python--%2.7 dmidecode--'
+    raw: 'pkg_add python--%3.7 dmidecode--'
     register: pkg_install
     changed_when: "': ok' in pkg_install.stdout"
 
