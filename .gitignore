@@ -1,1 +1,15 @@
+*.bak
+*.o
+*.old
+*.orig
+*.rej
+*~
+.*.swp
+.DS_Store
+.VolumeIcon.icns
+
 bootstrap_local.yml
+
+!.git
+!.git_keep
+!.gitkeep
