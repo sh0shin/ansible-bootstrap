@@ -1,6 +1,5 @@
 ---
 # bootstrap_alpine
-#
 
 - name: bootstrap alpine
   hosts: all # use: ansible-playbook -i <inventory-hosts> bootstrap_alpine.yml -l <hostname>
@@ -13,9 +12,9 @@
     changed_when: "'OK:' in apk_update.stdout"
 
   - name: apk add python
-    raw: 'apk add python2'
+    raw: 'apk add python3'
     register: apk_install
     changed_when: "'Installing ' in apk_install.stdout"
 
-# vim: set syn=yaml sw=2 ts=2 et :
+# vim: set syn=yaml sw=2 ts=2 et colorcolumn=160 :
 # eof
