@@ -1,17 +1,11 @@
 ---
 # bootstrap_freebsd
-#
 
 - name: bootstrap freebsd
   hosts: all # use: ansible-playbook -i <inventory-hosts> bootstrap_freebsd.yml -l <hostname>
   gather_facts: no
   strategy: linear
   tasks:
-
-  - name: utc timezone
-    raw: 'test -e /etc/localtime && echo exists || /usr/sbin/tzsetup UTC'
-    register: timezone
-    changed_when: "'exists' not in timezone.stdout"
 
   - name: pkg bootstrap
     raw: 'env ASSUME_ALWAYS_YES=YES pkg bootstrap'
@@ -23,5 +17,5 @@
     register: pkg_install
     changed_when: "'The most recent version of packages are already installed' not in pkg_install.stdout"
 
-# vim: set syn=yaml sw=2 ts=2 et :
+# vim: set syn=yaml sw=2 ts=2 et colorcolumn=160 :
 # eof
