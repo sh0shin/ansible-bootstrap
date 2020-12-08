@@ -12,9 +12,9 @@
     changed_when: "'Get:' in apt_update.stdout"
 
   - name: apt install dbus python++ ca-certificates
-    raw: 'apt-get install -qy --no-install-recommends dbus python3 python-apt ca-certificates'
+    raw: 'apt-get install -qy --no-install-recommends dbus python3 python3-apt ca-certificates'
     register: apt_install
     changed_when: "'0 upgraded, 0 newly installed' not in apt_install.stdout"
 
-# vim: set syn=yaml sw=2 ts=2 et colorcolumn=160 :
+# vim: set ft=yaml.ansible sw=2 ts=2 et colorcolumn=160 :
 # eof
