@@ -1,0 +1,20 @@
+---
+# bootstrap_redhat
+
+- name: bootstrap redhat
+  hosts: all # use: ansible-playbook -i <inventory-hosts> bootstrap_redhat.yml -l <hostname>
+  gather_facts: no
+  tasks:
+
+  - name: yum update
+    raw: 'yum update -q'
+    register: yum_update
+    changed_when: "'Get:' in yum_update.stdout"
+
+  - name: yum install python++ ca-certificates
+    raw: 'yum install -qy python36 python3-libselinux ca-certificates'
+    register: apt_install
+    changed_when: "'0 upgraded, 0 newly installed' not in apt_install.stdout"
+
+# vim: set ft=yaml.ansible sw=2 ts=2 et colorcolumn=160 :
+# eof
